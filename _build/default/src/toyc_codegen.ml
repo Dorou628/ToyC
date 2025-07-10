@@ -35,6 +35,7 @@ type instruction =
   | And of register * register * register (* 与运算 *)
   | Or of register * register * register  (* 或运算 *)
   | Jal of string              (* 跳转并链接 *)
+  | Jr of register             (* 跳转到寄存器 *)
 
 (* 将寄存器转换为字符串 *)
 let string_of_register = function
@@ -88,6 +89,7 @@ let string_of_instruction = function
   | Or (rd, rs1, rs2) -> Printf.sprintf "\tor %s, %s, %s"
       (string_of_register rd) (string_of_register rs1) (string_of_register rs2)
   | Jal label -> Printf.sprintf "\tjal %s" label
+  | Jr reg -> Printf.sprintf "\tjr %s" (string_of_register reg)
 
 (* 生成唯一的标签 *)
 let label_counter = ref 0
@@ -224,7 +226,17 @@ let rec generate_expr context expr =
         | [arg] ->
             let context, reg = generate_expr context arg in
             add_instruction context (Add (A0, reg, Zero))
-        | _ -> failwith "Multiple arguments not supported yet" in
+        | args ->
+            (* 多参数支持：将参数保存到栈上 *)
+            let rec save_args ctx arg_list offset =
+              match arg_list with
+              | [] -> ctx
+              | arg :: rest ->
+                  let ctx, reg = generate_expr ctx arg in
+                  let ctx = add_instruction ctx (Sw (reg, SP, offset)) in
+                  save_args ctx rest (offset - 4)
+            in
+            save_args context args (-28) in
       let context = add_instruction context (Jal func_name) in
       context, A0
   | Assign (name, expr) ->
@@ -346,7 +358,7 @@ let generate_function context func =
   let context = add_instruction context (Li (T0, context.stack_size)) in
   let context = add_instruction context (Add (SP, SP, T0)) in
   let context = add_instruction context (Lw (RA, SP, -4)) in
-  let context = add_instruction context (J "ra") in
+  let context = add_instruction context (Jr RA) in
   
   context
 

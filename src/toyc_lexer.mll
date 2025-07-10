@@ -12,7 +12,7 @@ rule token = parse
   | '\239' '\187' '\191' { token lexbuf } (* 跳过UTF-8 BOM字符 *)
   | [' ' '\t' '\n' '\r'] { token lexbuf } (* 跳过空白字符 *)
   | "//" [^ '\n']* '\n' { token lexbuf } (* 单行注释 *)
-  | "/*" ([^ '*'] | '*' [^ '/'])* "*/" { token lexbuf } (* 多行注释 *)
+  | "/*" { comment lexbuf; token lexbuf } (* 多行注释 *)
   
   (* 关键字 *)
   | "int" { INT_TYPE }
@@ -59,3 +59,9 @@ rule token = parse
   | eof { EOF }
   
   | _ { raise (Lexical_error ("Unexpected character: " ^ Lexing.lexeme lexbuf)) }
+
+and comment = parse
+  | "*/" { () }
+  | "/*" { comment lexbuf; comment lexbuf }
+  | _ { comment lexbuf }
+  | eof { raise (Lexical_error "Unterminated comment") }
