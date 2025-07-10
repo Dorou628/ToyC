@@ -1,0 +1,35 @@
+(ocamllex toyc_lexer)
+
+(menhir
+ (modules toyc_parser))
+
+(library
+ (name toyc_lib)
+ (public_name toyc)
+ (modules toyc_ast toyc_lexer toyc_parser toyc_semantic toyc_codegen))
+
+(executable
+ (name test_lexer)
+ (modules test_lexer)
+ (libraries toyc_lib))
+
+(executable
+ (name test_parser)
+ (modules test_parser)
+ (libraries toyc_lib))
+
+(executable
+ (name test_semantic)
+ (modules test_semantic)
+ (libraries toyc_lib))
+
+(executable
+ (name test_codegen)
+ (modules test_codegen)
+ (libraries toyc_lib))
+
+(executable
+ (name main)
+ (public_name toyc)
+ (modules main)
+ (libraries toyc_lib))

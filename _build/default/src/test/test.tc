@@ -1,0 +1,10 @@
+// 简单的ToyC测试程序
+int main() {
+    int x = 10;
+    int y = 20;
+    if (x < y) {
+        return x + y; // 返回两数之和
+    } else {
+        return x - y;
+    }
+}

@@ -1,0 +1,48 @@
+// 这是一个单行注释
+/* 这是一个
+   多行注释 */
+
+// 1. 测试基本函数定义
+int main() {
+    return 0;
+}
+
+// 2. 测试变量声明和运算
+int test_operators() {
+    int a = 42;
+    int b = -10;
+    int c = a + b * 2;
+    
+    if (a > b && c <= 100) {
+        return 1;
+    } else {
+        return 0;
+    }
+}
+
+// 3. 测试循环和控制语句
+void test_control() {
+    int i = 0;
+    while (i < 10) {
+        if (i == 5) {
+            break;
+        }
+        i = i + 1;
+        continue;
+    }
+    return;
+}
+
+// 4. 测试各种运算符
+int test_expressions() {
+    int x = 1;
+    int y = 2;
+    int z = 3;
+    
+    // 测试所有运算符
+    int result = (x + y) * z;
+    int logic = x < y && y <= z || z > x;
+    int compare = x == y || y != z;
+    
+    return result % 2;
+}

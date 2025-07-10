@@ -1,0 +1,7 @@
+version = "0.1.0"
+description = ""
+requires = ""
+archive(byte) = "toyc_lib.cma"
+archive(native) = "toyc_lib.cmxa"
+plugin(byte) = "toyc_lib.cma"
+plugin(native) = "toyc_lib.cmxs"

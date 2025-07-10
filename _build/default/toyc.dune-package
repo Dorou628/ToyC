@@ -1,0 +1,82 @@
+(lang dune 3.17)
+(name toyc)
+(version 0.1.0)
+(sections (lib .) (libexec .) (bin ../../bin))
+(files
+ (lib
+  (META
+   dune-package
+   opam
+   toyc_ast.ml
+   toyc_codegen.ml
+   toyc_lexer.ml
+   toyc_lib.a
+   toyc_lib.cma
+   toyc_lib.cmi
+   toyc_lib.cmt
+   toyc_lib.cmx
+   toyc_lib.cmxa
+   toyc_lib.ml
+   toyc_lib__Toyc_ast.cmi
+   toyc_lib__Toyc_ast.cmt
+   toyc_lib__Toyc_ast.cmx
+   toyc_lib__Toyc_codegen.cmi
+   toyc_lib__Toyc_codegen.cmt
+   toyc_lib__Toyc_codegen.cmx
+   toyc_lib__Toyc_lexer.cmi
+   toyc_lib__Toyc_lexer.cmt
+   toyc_lib__Toyc_lexer.cmx
+   toyc_lib__Toyc_parser.cmi
+   toyc_lib__Toyc_parser.cmt
+   toyc_lib__Toyc_parser.cmti
+   toyc_lib__Toyc_parser.cmx
+   toyc_lib__Toyc_semantic.cmi
+   toyc_lib__Toyc_semantic.cmt
+   toyc_lib__Toyc_semantic.cmx
+   toyc_parser.ml
+   toyc_parser.mli
+   toyc_semantic.ml))
+ (libexec (toyc_lib.cmxs))
+ (bin (toyc.exe)))
+(library
+ (name toyc)
+ (kind normal)
+ (archives (byte toyc_lib.cma) (native toyc_lib.cmxa))
+ (plugins (byte toyc_lib.cma) (native toyc_lib.cmxs))
+ (native_archives toyc_lib.a)
+ (main_module_name Toyc_lib)
+ (modes byte native)
+ (modules
+  (wrapped
+   (group
+    (alias
+     (obj_name toyc_lib)
+     (visibility public)
+     (kind alias)
+     (source (path Toyc_lib) (impl (path toyc_lib.ml-gen))))
+    (name Toyc_lib)
+    (modules
+     (module
+      (obj_name toyc_lib__Toyc_ast)
+      (visibility public)
+      (source (path Toyc_ast) (impl (path toyc_ast.ml))))
+     (module
+      (obj_name toyc_lib__Toyc_codegen)
+      (visibility public)
+      (source (path Toyc_codegen) (impl (path toyc_codegen.ml))))
+     (module
+      (obj_name toyc_lib__Toyc_lexer)
+      (visibility public)
+      (source (path Toyc_lexer) (impl (path toyc_lexer.ml))))
+     (module
+      (obj_name toyc_lib__Toyc_parser)
+      (visibility public)
+      (source
+       (path Toyc_parser)
+       (intf (path toyc_parser.mli))
+       (impl (path toyc_parser.ml))))
+     (module
+      (obj_name toyc_lib__Toyc_semantic)
+      (visibility public)
+      (source (path Toyc_semantic) (impl (path toyc_semantic.ml))))))
+   (wrapped true))))

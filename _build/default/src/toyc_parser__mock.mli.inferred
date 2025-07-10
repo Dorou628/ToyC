@@ -1,0 +1,54 @@
+type token =
+    WHILE
+  | VOID_TYPE
+  | SEMICOLON
+  | RPAREN
+  | RETURN
+  | RBRACE
+  | PLUS
+  | OR
+  | NUMBER of int
+  | NOT
+  | NE
+  | MUL
+  | MOD
+  | MINUS
+  | LT
+  | LPAREN
+  | LE
+  | LBRACE
+  | INT_TYPE
+  | IF
+  | ID of string
+  | GT
+  | GE
+  | EQ
+  | EOF
+  | ELSE
+  | DIV
+  | CONTINUE
+  | COMMA
+  | BREAK
+  | ASSIGN
+  | AND
+val menhir_begin_marker : int
+val xv_unary_op : Toyc_ast.unary_op
+val xv_type_spec : bool
+val xv_stmt : Toyc_ast.stmt
+val xv_separated_nonempty_list_COMMA_param_ : Toyc_ast.param list
+val xv_separated_nonempty_list_COMMA_expr_ : Toyc_ast.expr list
+val xv_separated_list_COMMA_param_ : Toyc_ast.param list
+val xv_separated_list_COMMA_expr_ : Toyc_ast.expr list
+val xv_program : Toyc_ast.program
+val xv_preceded_ELSE_stmt_ : Toyc_ast.stmt
+val xv_param : Toyc_ast.param
+val xv_option_preceded_ELSE_stmt__ : Toyc_ast.stmt option
+val xv_option_expr_ : Toyc_ast.expr option
+val xv_loption_separated_nonempty_list_COMMA_param__ : Toyc_ast.param list
+val xv_loption_separated_nonempty_list_COMMA_expr__ : Toyc_ast.expr list
+val xv_list_stmt_ : Toyc_ast.stmt list
+val xv_list_function_def_ : Toyc_ast.function_def list
+val xv_function_def : Toyc_ast.function_def
+val xv_expr : Toyc_ast.expr
+val xv_binary_op : Toyc_ast.binary_op
+val menhir_end_marker : int

@@ -1,0 +1,33 @@
+// 简单的ToyC测试文件
+
+// 测试函数声明和返回
+int add(int x, int y) {
+    return x + y;
+}
+
+// 测试条件语句和循环
+int test_control(int n) {
+    int sum = 0;
+    int i = 0;
+    while (i < n) {
+        if (i % 2 == 0) {
+            sum = sum + i;
+        }
+        i = i + 1;
+    }
+    return sum;
+}
+
+// 主函数
+int main() {
+    int a = 5;
+    int b = 3;
+    int c = add(a, b);
+    int result = test_control(10);
+    
+    if (c > 0) {
+        return result;
+    } else {
+        return 0;
+    }
+}

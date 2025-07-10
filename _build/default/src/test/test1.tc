@@ -1,0 +1,32 @@
+// test_compiler.tc: 测试编译器的基本功能
+
+// 测试函数声明和返回
+int add(int x, int y) {
+    return x + y;
+}
+
+// 测试条件语句和循环
+int test_control(int n) {
+    int sum = 0;
+    int i;
+    for (i = 0; i < n; i = i + 1) {
+        if (i % 2 == 0) {
+            sum = sum + i;
+        }
+    }
+    return sum;
+}
+
+// 主函数，测试变量、运算、函数调用和控制流
+int main() {
+    int a = 5;
+    int b = -3;
+    int c = add(a, b); // 测试函数调用
+    int result = test_control(10); // 测试循环和条件
+    
+    if (c > 0) {
+        return result;
+    } else {
+        return -result;
+    }
+}
