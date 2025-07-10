@@ -1,7 +1,7 @@
 (lang dune 3.17)
 (name toyc)
 (version 0.1.0)
-(sections (lib .) (libexec .) (bin ../../bin))
+(sections (lib .) (libexec .) (bin ../../bin) (doc ../../doc/toyc))
 (files
  (lib
   (META
@@ -37,7 +37,8 @@
    toyc_parser.mli
    toyc_semantic.ml))
  (libexec (toyc_lib.cmxs))
- (bin (toyc.exe)))
+ (bin (toyc.exe))
+ (doc (README.md)))
 (library
  (name toyc)
  (kind normal)

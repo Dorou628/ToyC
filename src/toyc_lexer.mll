@@ -9,6 +9,7 @@ let alpha = ['a'-'z' 'A'-'Z']
 let ident = ['_' 'a'-'z' 'A'-'Z'] ['_' 'a'-'z' 'A'-'Z' '0'-'9']*
 
 rule token = parse
+  | '\239' '\187' '\191' { token lexbuf } (* 跳过UTF-8 BOM字符 *)
   | [' ' '\t' '\n' '\r'] { token lexbuf } (* 跳过空白字符 *)
   | "//" [^ '\n']* '\n' { token lexbuf } (* 单行注释 *)
   | "/*" ([^ '*'] | '*' [^ '/'])* "*/" { token lexbuf } (* 多行注释 *)

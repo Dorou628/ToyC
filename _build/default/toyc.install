@@ -38,3 +38,6 @@ libexec: [
 bin: [
   "_build/install/default/bin/toyc.exe"
 ]
+doc: [
+  "_build/install/default/doc/toyc/README.md"
+]

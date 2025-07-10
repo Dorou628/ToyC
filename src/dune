@@ -27,9 +27,3 @@
  (name test_codegen)
  (modules test_codegen)
  (libraries toyc_lib))
-
-(executable
- (name main)
- (public_name toyc)
- (modules main)
- (libraries toyc_lib))
